@@ -2,20 +2,26 @@
 <html>
 <head>
 <title>Eid Greeting</title>
+
 <style>
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
   background:#070b14;
   color:white;
+
+  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  height:100vh;
-  text-align:center;
+
+  padding:20px;
+  box-sizing:border-box;
+  overflow:auto;
 }
 
 .card{
+  width:100%;
   max-width:720px;
   background:rgba(255,255,255,0.06);
   padding:35px;
@@ -45,6 +51,7 @@ p{
 
 img{
   width:220px;
+  max-width:100%;
   margin-top:18px;
   border-radius:18px;
 }
@@ -66,27 +73,38 @@ img{
 
 const pages = [
 
-`Eid Mubarak 🌙\nMay this beautiful and blessed day bring immense peace, warmth, and happiness into your life. May every silent dua you made during Ramadan be accepted in the most beautiful way. May Allah fill your heart with Noor, remove your worries, and replace them with ease. May your life shine with success, positivity, and meaningful moments. Stay blessed and keep smiling always 🤍`,
+`Eid Mubarak 🌙
+May this beautiful and blessed day bring immense peace, warmth, and happiness into your life. May every silent dua you made during Ramadan be accepted in the most beautiful way. May Allah fill your heart with Noor, remove your worries, and replace them with ease. May your life shine with success, positivity, and meaningful moments. Stay blessed and keep smiling always 🤍`,
 
-`On this special Eid 💫\nMay your days be filled with joy, laughter, and unforgettable moments. May Allah grant you success in everything you aim for and guide you towards what is best for you. May your heart always remain peaceful and your soul content. Even in difficult times, may you always find light and hope. You truly deserve happiness ✨`,
+`On this special Eid 💫
+May your days be filled with joy, laughter, and unforgettable moments. May Allah grant you success in everything you aim for and guide you towards what is best for you. May your heart always remain peaceful and your soul content. Even in difficult times, may you always find light and hope. You truly deserve happiness ✨`,
 
-`Eid is a time of gratitude 🌸\nIt reminds us of the patience and faith we built during Ramadan. May Allah forgive all your past mistakes and accept your sincere efforts. May your life be filled with barakah, your home with peace, and your heart with strong iman. May every step you take lead you towards success and الخير 🤍`,
+`Eid is a time of gratitude 🌸
+It reminds us of the patience and faith we built during Ramadan. May Allah forgive all your past mistakes and accept your sincere efforts. May your life be filled with barakah, your home with peace, and your heart with strong iman. May every step you take lead you towards success and الخير 🤍`,
 
-`This Eid feels even more special 🌙\nBecause of the people who bring comfort and happiness into our lives. May Allah always keep you safe and protect you from every hardship. May your future be filled with success, inner peace, and beautiful achievements. Never stop believing in yourself and always keep moving forward ✨`,
+`This Eid feels even more special 🌙
+Because of the people who bring comfort and happiness into our lives. May Allah always keep you safe and protect you from every hardship. May your future be filled with success, inner peace, and beautiful achievements. Never stop believing in yourself and always keep moving forward ✨`,
 
-`Another Eid, another blessing 🌙\nA chance to reflect, forgive, and spread love all around. May your struggles turn into ease and your sadness into happiness. May Allah fill your life with endless barakah and guide your every step. May your heart always remain light, hopeful, and full of positivity. Ameen 🤍`,
+`Another Eid, another blessing 🌙
+A chance to reflect, forgive, and spread love all around. May your struggles turn into ease and your sadness into happiness. May Allah fill your life with endless barakah and guide your every step. May your heart always remain light, hopeful, and full of positivity. Ameen 🤍`,
 
-`Ramadan is leaving us 🌙\nBut its peace, lessons, and beauty will always remain in our hearts. The nights we spent in prayer and the patience we showed were never wasted. May Allah accept every effort we made. May we continue the good habits we built and stay connected to Him always 🤍`,
+`Ramadan is leaving us 🌙
+But its peace, lessons, and beauty will always remain in our hearts. The nights we spent in prayer and the patience we showed were never wasted. May Allah accept every effort we made. May we continue the good habits we built and stay connected to Him always 🤍`,
 
-`Those peaceful nights of Ramadan 🌌\nFilled with silence, reflection, and heartfelt prayers. May Allah accept every moment we spent seeking His mercy. May our hearts always stay connected to Him in every situation. May we never lose this beautiful feeling of faith 🤍`,
+`Those peaceful nights of Ramadan 🌌
+Filled with silence, reflection, and heartfelt prayers. May Allah accept every moment we spent seeking His mercy. May our hearts always stay connected to Him in every situation. May we never lose this beautiful feeling of faith 🤍`,
 
-`Ramadan taught us patience 🌸\nIt showed us discipline and what truly matters in life. May we stay consistent in our prayers and keep our hearts kind and sincere. May Allah guide us even after Ramadan ends and keep us firm on the right path 🤲`,
+`Ramadan taught us patience 🌸
+It showed us discipline and what truly matters in life. May we stay consistent in our prayers and keep our hearts kind and sincere. May Allah guide us even after Ramadan ends and keep us firm on the right path 🤲`,
 
-`Let’s not leave Ramadan 🌙\nLet’s carry its Noor and peace into our daily lives. Keep praying, trusting, and believing in Allah’s plan. He listens to every silent dua and knows every feeling. Stay strong in your faith no matter what 🤍`,
+`Let’s not leave Ramadan 🌙
+Let’s carry its Noor and peace into our daily lives. Keep praying, trusting, and believing in Allah’s plan. He listens to every silent dua and knows every feeling. Stay strong in your faith no matter what 🤍`,
 
-`May Allah invite us again 🌙\nTo witness another Ramadan with stronger faith and better hearts. May we return with more sincerity, patience, and gratitude. May we never drift away from His path 🤍`,
+`May Allah invite us again 🌙
+To witness another Ramadan with stronger faith and better hearts. May we return with more sincerity, patience, and gratitude. May we never drift away from His path 🤍`,
 
-`Eid Mubarak once again 🌙\nMay your life be filled with peace, happiness, and endless barakah. May every coming day bring you closer to success. May Allah always guide and protect you. Stay smiling and keep faith always 🤍`
+`Eid Mubarak once again 🌙
+May your life be filled with peace, happiness, and endless barakah. May every coming day bring you closer to success. May Allah always guide and protect you. Stay smiling and keep faith always 🤍`
 
 ];
 

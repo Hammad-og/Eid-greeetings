@@ -140,7 +140,9 @@ function prev(){
   }
 }
 
-show();
+document.body.addEventListener("click", () => {
+  show();
+}, { once: true });
 
 </script>
 

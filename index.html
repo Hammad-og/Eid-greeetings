@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid & Ramadan Greetings</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fffaf5;
+  overflow: hidden;
+}
+.page {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+.page.active {
+  display: block;
+}
+img {
+  max-width: 300px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #ffb6b9;
+  color: white;
+  cursor: pointer;
+}
+p {
+  max-width: 600px;
+  margin: 10px auto;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<div id="intro" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;">
+  <h3>Tap the button gently ✨</h3>
+  <input id="nameInput" placeholder="Enter their name" style="padding:10px;border-radius:10px;border:none;margin:10px;text-align:center;" />
+  <button onclick="start()">TAP</button>
+  <div id="glow" style="width:120px;height:120px;border-radius:50%;background:#222;margin-top:30px;"></div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+let to = params.get("to") || "";
+const from = params.get("from") || "Hammad";
+const to = params.get("to") || "Someone Special";
+const from = params.get("from") || "Hammad";
+
+function start(){
+  if(!to){
+    to = document.getElementById("nameInput").value || "Someone Special";
+  }
+  document.getElementById("intro").style.display="none";
+  showPage(0);
+}
+
+const pages = [
+  {
+    text: `Eid Mubarak ${to}! 🌙<br>
+    May your heart be filled with peace and happiness on this beautiful day.<br>
+    May every dua you made turn into reality in the best way.<br>
+    I hope your life shines with endless blessings and joy.<br>
+    Stay smiling always and keep spreading kindness 🤍`,
+    img:"cat1.jpg", audio:"nasheed1.mp3"
+  },
+  {
+    text: `Wishing you a very warm and joyful Eid 💫<br>
+    May your days be filled with laughter and your nights with peace.<br>
+    May Allah grant you success in everything you aim for.<br>
+    You truly deserve all the happiness in the world.<br>
+    Keep being the amazing person you are ✨`,
+    img:"cat2.jpg", audio:"nasheed1.mp3"
+  },
+  {
+    text: `On this blessed occasion of Eid 🌸<br>
+    May Allah accept all your prayers and forgive your sins.<br>
+    May your life be surrounded with نور and positivity.<br>
+    Every moment of yours be filled with contentment.<br>
+    Eid Mubarak once again 🤍`,
+    img:"cat3.jpg", audio:"nasheed1.mp3"
+  },
+  {
+    text: `Eid becomes more special when shared with people like you ✨<br>
+    Your presence brings comfort and happiness to others.<br>
+    May Allah keep you under His protection always.<br>
+    May your journey be filled with success and peace.<br>
+    Keep shining and smiling 🐾`,
+    img:"cat4.jpg", audio:"nasheed1.mp3"
+  },
+  {
+    text: `Another Eid, another chance to be grateful 🌙<br>
+    May your life be filled with endless blessings and love.<br>
+    May every hardship turn into ease for you.<br>
+    May Allah always guide you to the right path.<br>
+    Stay blessed and happy always 🤍`,
+    img:"cat5.jpg", audio:"nasheed1.mp3"
+  },
+  {
+    text: `Ramadan is slowly leaving us 🌙<br>
+    But its peace and lessons will always remain.<br>
+    The duas we made will never go unheard.<br>
+    May we carry this نور in our hearts forever.<br>
+    Ameen 🤍`,
+    img:"cat6.jpg", audio:"nasheed2.mp3"
+  },
+  {
+    text: `Those quiet nights of Ramadan 🌌<br>
+    The tears, the prayers, the hope we felt.<br>
+    May Allah accept every single moment of it.<br>
+    May we never lose this connection again.<br>
+    Keep your heart close to Him always ✨`,
+    img:"cat7.jpg", audio:"nasheed2.mp3"
+  },
+  {
+    text: `Ramadan taught us patience and faith 🌸<br>
+    It reminded us what truly matters in life.<br>
+    May we stay consistent even after it ends.<br>
+    May our hearts remain soft and pure.<br>
+    Ameen 🤲`,
+    img:"cat8.jpg", audio:"nasheed2.mp3"
+  },
+  {
+    text: `Let’s not say goodbye to Ramadan 🌙<br>
+    Let’s carry its habits forward in our lives.<br>
+    Keep praying, keep hoping, keep believing.<br>
+    Allah is always listening to your قلب.<br>
+    Stay strong in your faith 🤍`,
+    img:"cat9.jpg", audio:"nasheed2.mp3"
+  },
+  {
+    text: `May Allah invite us again next Ramadan 🌙<br>
+    May we return even better than before.<br>
+    May our hearts always long for His mercy.<br>
+    May our lives stay guided by His نور.<br>
+    Ameen 🤍`,
+    img:"cat10.jpg", audio:"nasheed2.mp3"
+  },
+  {
+    text: `From: ${from}<br>
+    To: ${to || "You and Your Family"}<br>
+    With sincere prayers and heartfelt wishes.<br>
+    May your life be filled with peace, happiness and barakah.<br>
+    Eid Mubarak 🤍`,
+    img:"cat11.jpg", audio:"nasheed2.mp3"
+  }
+];
+
+let current = 0;
+
+function showPage(index) {
+  document.body.innerHTML = `
+    <audio src="${pages[index].audio}" autoplay loop></audio>
+    <div class="page active">
+      <h2>${pages[index].text}</h2>
+      <img src="${pages[index].img}" />
+      <br>
+      ${index < pages.length-1 ? '<button onclick="nextPage()">Next ➜</button>' : ''}
+    </div>
+  `;
+}
+
+function nextPage() {
+  current++;
+  // start controlled by intro screen
+}
+
+showPage(current);
+</script>
+
+</body>
+</html>

@@ -1,165 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eid Greeting</title>
-
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0d1117, #1e2530);
-  color: white;
-  overflow: hidden;
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#0b0f19;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  text-align:center;
 }
 
-#intro {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.card{
+  max-width:700px;
+  background:rgba(255,255,255,0.08);
+  padding:30px;
+  border-radius:20px;
 }
 
-button {
-  padding: 12px 28px;
-  border-radius: 30px;
-  border: none;
-  background: #f7d46b;
-  color: black;
-  cursor: pointer;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-.page {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.8s ease;
-}
-
-.page.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
-  border-radius: 25px;
-  padding: 35px;
-  max-width: 750px;
-  text-align: center;
-}
-
-p {
-  line-height: 1.9;
-  font-size: 17px;
-}
-
-img {
-  width: 230px;
-  border-radius: 20px;
-  margin-top: 20px;
+button{
+  padding:10px 20px;
+  margin:10px;
+  border:none;
+  border-radius:20px;
+  background:#f7d46b;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div id="intro">
-  <h2>Tap to begin 🌙</h2>
-  <button onclick="start()">Start</button>
+<div class="card">
+  <p id="text"></p>
+  <img id="img" width="200"><br>
+  <button onclick="prev()">Back</button>
+  <button onclick="next()">Next</button>
 </div>
 
 <audio id="audio" loop></audio>
 
-<div id="app"></div>
-
 <script>
+
 const pages = [
 
-/* 1–5 Eid BIG PARAS */
-`Eid Mubarak 🌙\nMay this beautiful day bring peace, warmth, and endless happiness into your life. May every prayer you made in silence be accepted in the most beautiful way. May Allah fill your heart with نور, remove every worry, and replace it with calmness and ease. May your days ahead be filled with positivity, success, and moments that make you smile. Keep shining and spreading kindness wherever you go 🤍`,
+/* 1–5 Eid BIG */
+`Eid Mubarak 🌙
+May this beautiful day bring peace, happiness and warmth into your life. May every dua you made be accepted. May Allah fill your heart with Noor and remove your worries. May your life be full of success and positivity. Stay blessed always 🤍`,
 
-`On this blessed Eid 💫\nMay your life be surrounded with joy, laughter, and meaningful moments that stay forever. May Allah grant you success in everything you aim for and open doors you never imagined. May your heart always stay content, your mind peaceful, and your soul satisfied. Even in hard times, may you always find light and hope guiding you forward ✨`,
+`On this special Eid 💫
+May your days be filled with joy and laughter. May Allah grant you success in everything. May your heart stay peaceful and content. May you always find hope in every situation. You deserve happiness ✨`,
 
-`Eid is not just a celebration 🌸\nIt is a reminder of gratitude, patience, and faith we built during Ramadan. May Allah forgive all your past mistakes and accept your sincere efforts. May your life be filled with barakah, your home with peace, and your قلب with strong iman. May every step you take lead you towards success and happiness 🤍`,
+`Eid is a time of gratitude 🌸
+It reminds us of faith and patience. May Allah forgive your mistakes and accept your prayers. May your life be filled with barakah and peace. May your journey lead to success 🤍`,
 
-`This Eid feels even more special 🌙\nBecause it reminds us of the people who bring comfort and happiness into our lives. May Allah always keep you safe from every hardship and protect you from unseen difficulties. May your future be filled with success, inner peace, and beautiful achievements. Never stop believing in yourself and always keep moving forward ✨`,
+`This Eid feels special 🌙
+Because of the people around us. May Allah protect you always. May your future be bright and peaceful. Keep smiling and stay strong ✨`,
 
-`Another Eid, another blessing 🌙\nA chance to start fresh, forgive, and spread love all around us. May your struggles turn into ease and your sadness into happiness. May Allah fill your life with endless barakah, guide your path, and strengthen your faith. May your heart always remain light, hopeful, and full of positivity. Ameen 🤍`,
+`Another Eid another blessing 🌙
+A chance to spread love and kindness. May your struggles turn into ease. May Allah bless your life. Stay hopeful always 🤍`,
 
-/* 6–10 Ramadan BIG PARAS */
-`Ramadan is leaving us 🌙\nBut its peace, lessons, and beauty will always remain in our hearts. The nights we spent in prayer and the tears we shed were never wasted. May Allah accept every small effort we made and reward us beyond imagination. May we continue the good habits we built and never lose this connection with Him 🤍`,
+/* 6–10 Ramadan BIG */
+`Ramadan is leaving 🌙
+But its lessons stay forever. May Allah accept our prayers and efforts. May we stay connected to Him. Ameen 🤍`,
 
-`Those peaceful nights of Ramadan 🌌\nFilled with silence, prayers, and deep thoughts about life. May Allah accept every moment we spent seeking His mercy. May our hearts always stay connected to Him in every situation. May we never lose the feeling of ایمان that we experienced in this blessed month 🤍`,
+`Those peaceful nights 🌌
+Filled with prayer and hope. May Allah accept everything. Stay close to Him always 🤍`,
 
-`Ramadan taught us patience 🌸\nIt showed us discipline, self-control, and what truly matters in life. May we stay consistent in our prayers and never leave what we built. May our hearts remain soft, kind, and sincere towards others. May Allah guide us even after Ramadan ends and keep us on the right path 🤲`,
+`Ramadan taught patience 🌸
+Stay consistent in prayers. Keep your heart kind. May Allah guide you 🤲`,
 
-`Let’s not say goodbye to Ramadan 🌙\nLet’s carry its habits, نور, and peace into our daily lives. Keep praying, keep trusting, and keep believing in Allah’s plan. He listens to every silent dua and understands every feeling in your heart. Stay strong in your faith no matter what happens 🤍`,
+`Carry Ramadan forward 🌙
+Keep faith strong and trust Allah. He listens to every dua 🤍`,
 
-`May Allah invite us again 🌙\nTo witness another Ramadan with stronger faith and better hearts. May we return with more sincerity, patience, and gratitude. May our lives always stay guided by His mercy and نور. May we never drift away from His path and always stay close to Him 🤍`,
+`May we see Ramadan again 🌙
+With stronger faith and better hearts. Ameen 🤍`,
 
 /* 11 FINAL */
-`Eid Mubarak once again 🌙\nMay your life be filled with peace, happiness, and endless barakah. May every coming day bring you closer to your dreams and success. May Allah always guide you, protect you, and keep you under His mercy. Stay smiling, stay strong, and always keep faith in Him 🤍`
+`Eid Mubarak 🌙
+May your life be full of peace, happiness and barakah. May Allah guide and protect you always.
+
+From: Hammad 💌
+To: You and Your Family 🤍`
+
 ];
 
-let index = 0;
+let i = 0;
 
-function start(){
-  document.getElementById("intro").style.display = "none";
-  showPage();
-}
+function show(){
+  document.getElementById("text").innerHTML = pages[i].replace(/\n/g,"<br>");
+  document.getElementById("img").src = "cat"+(i+1)+".jpg";
 
-function showPage(){
-  const app = document.getElementById("app");
-
-  const page = document.createElement("div");
-  page.className = "page active";
-
-  const formattedText = pages[index].replace(/\n/g, "<br>");
-
-  page.innerHTML = `
-    <div class="card">
-      <p>${formattedText}</p>
-      <img src="cat${index+1}.jpg" onerror="this.style.display='none'">
-      ${index < pages.length-1 ? '<button onclick="next()">Next</button>' : ''}
-    </div>
-  `;
-
-  app.appendChild(page);
-
-  const audio = document.getElementById("audio");
-
-  if(index < 5){
-    if(!audio.src.includes("nasheed1.mp3")){
-      audio.src = "nasheed1.mp3";
-    }
-  } else {
-    if(!audio.src.includes("nasheed2.mp3")){
-      audio.src = "nasheed2.mp3";
-    }
-  }
-
+  let audio = document.getElementById("audio");
+  audio.src = i<5 ? "nasheed1.mp3" : "nasheed2.mp3";
   audio.currentTime = 0;
   audio.play().catch(()=>{});
 }
 
 function next(){
-  const pagesDOM = document.querySelectorAll(".page");
-  pagesDOM[pagesDOM.length - 1].classList.remove("active");
-
-  index++;
-  showPage();
+  if(i < pages.length-1){
+    i++;
+    show();
+  }
 }
+
+function prev(){
+  if(i > 0){
+    i--;
+    show();
+  }
+}
+
+/* load first page */
+show();
+
 </script>
 
 </body>

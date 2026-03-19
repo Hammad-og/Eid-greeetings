@@ -3,181 +3,216 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eid & Ramadan Greetings</title>
+<title>Eid Greeting</title>
+
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #fffaf5;
+  background: linear-gradient(135deg, #0d1117, #1e2530);
+  color: white;
   overflow: hidden;
 }
-.page {
-  display: none;
+
+#intro {
   height: 100vh;
-  width: 100vw;
-  text-align: center;
-  padding: 40px;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+button {
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: none;
+  background: #f7d46b;
+  color: black;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
 .page.active {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
+
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.4);
+}
+
+p {
+  line-height: 1.7;
+}
+
 img {
-  max-width: 300px;
+  width: 220px;
   border-radius: 20px;
   margin-top: 20px;
 }
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: #ffb6b9;
-  color: white;
-  cursor: pointer;
-}
-p {
-  max-width: 600px;
-  margin: 10px auto;
-  line-height: 1.6;
-}
 </style>
 </head>
+
 <body>
 
-<div id="intro" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;">
-  <h3>Tap the button gently ✨</h3>
-  <input id="nameInput" placeholder="Enter their name" style="padding:10px;border-radius:10px;border:none;margin:10px;text-align:center;" />
-  <button onclick="start()">TAP</button>
-  <div id="glow" style="width:120px;height:120px;border-radius:50%;background:#222;margin-top:30px;"></div>
+<div id="intro">
+  <h2>Tap to begin 🌙</h2>
+  <button onclick="start()">Start</button>
 </div>
 
+<audio id="audio" loop></audio>
+
+<div id="app"></div>
+
 <script>
-const params = new URLSearchParams(window.location.search);
-let to = params.get("to") || "";
-const from = params.get("from") || "Hammad";
-const to = params.get("to") || "Someone Special";
-const from = params.get("from") || "Hammad";
-
-function start(){
-  if(!to){
-    to = document.getElementById("nameInput").value || "Someone Special";
-  }
-  document.getElementById("intro").style.display="none";
-  showPage(0);
-}
-
 const pages = [
-  {
-    text: `Eid Mubarak ${to}! 🌙<br>
-    May your heart be filled with peace and happiness on this beautiful day.<br>
-    May every dua you made turn into reality in the best way.<br>
-    I hope your life shines with endless blessings and joy.<br>
-    Stay smiling always and keep spreading kindness 🤍`,
-    img:"cat1.jpg", audio:"nasheed1.mp3"
-  },
-  {
-    text: `Wishing you a very warm and joyful Eid 💫<br>
-    May your days be filled with laughter and your nights with peace.<br>
-    May Allah grant you success in everything you aim for.<br>
-    You truly deserve all the happiness in the world.<br>
-    Keep being the amazing person you are ✨`,
-    img:"cat2.jpg", audio:"nasheed1.mp3"
-  },
-  {
-    text: `On this blessed occasion of Eid 🌸<br>
-    May Allah accept all your prayers and forgive your sins.<br>
-    May your life be surrounded with نور and positivity.<br>
-    Every moment of yours be filled with contentment.<br>
-    Eid Mubarak once again 🤍`,
-    img:"cat3.jpg", audio:"nasheed1.mp3"
-  },
-  {
-    text: `Eid becomes more special when shared with people like you ✨<br>
-    Your presence brings comfort and happiness to others.<br>
-    May Allah keep you under His protection always.<br>
-    May your journey be filled with success and peace.<br>
-    Keep shining and smiling 🐾`,
-    img:"cat4.jpg", audio:"nasheed1.mp3"
-  },
-  {
-    text: `Another Eid, another chance to be grateful 🌙<br>
-    May your life be filled with endless blessings and love.<br>
-    May every hardship turn into ease for you.<br>
-    May Allah always guide you to the right path.<br>
-    Stay blessed and happy always 🤍`,
-    img:"cat5.jpg", audio:"nasheed1.mp3"
-  },
-  {
-    text: `Ramadan is slowly leaving us 🌙<br>
-    But its peace and lessons will always remain.<br>
-    The duas we made will never go unheard.<br>
-    May we carry this نور in our hearts forever.<br>
-    Ameen 🤍`,
-    img:"cat6.jpg", audio:"nasheed2.mp3"
-  },
-  {
-    text: `Those quiet nights of Ramadan 🌌<br>
-    The tears, the prayers, the hope we felt.<br>
-    May Allah accept every single moment of it.<br>
-    May we never lose this connection again.<br>
-    Keep your heart close to Him always ✨`,
-    img:"cat7.jpg", audio:"nasheed2.mp3"
-  },
-  {
-    text: `Ramadan taught us patience and faith 🌸<br>
-    It reminded us what truly matters in life.<br>
-    May we stay consistent even after it ends.<br>
-    May our hearts remain soft and pure.<br>
-    Ameen 🤲`,
-    img:"cat8.jpg", audio:"nasheed2.mp3"
-  },
-  {
-    text: `Let’s not say goodbye to Ramadan 🌙<br>
-    Let’s carry its habits forward in our lives.<br>
-    Keep praying, keep hoping, keep believing.<br>
-    Allah is always listening to your قلب.<br>
-    Stay strong in your faith 🤍`,
-    img:"cat9.jpg", audio:"nasheed2.mp3"
-  },
-  {
-    text: `May Allah invite us again next Ramadan 🌙<br>
-    May we return even better than before.<br>
-    May our hearts always long for His mercy.<br>
-    May our lives stay guided by His نور.<br>
-    Ameen 🤍`,
-    img:"cat10.jpg", audio:"nasheed2.mp3"
-  },
-  {
-    text: `From: ${from}<br>
-    To: ${to || "You and Your Family"}<br>
-    With sincere prayers and heartfelt wishes.<br>
-    May your life be filled with peace, happiness and barakah.<br>
-    Eid Mubarak 🤍`,
-    img:"cat11.jpg", audio:"nasheed2.mp3"
-  }
+
+/* 1–5 Eid */
+`Eid Mubarak 🌙  
+May your heart be filled with peace and warmth today.  
+May every silent dua you made be accepted beautifully.  
+May your life shine with happiness and positivity.  
+May Allah protect you from every hardship.  
+Stay blessed and keep smiling always 🤍`,
+
+`On this beautiful Eid 💫  
+May your days be filled with joy and laughter.  
+May Allah grant you success in everything you do.  
+May your heart always feel light and content.  
+May you always find hope in every situation.  
+You truly deserve happiness ✨`,
+
+`Eid is a time of gratitude 🌸  
+A moment to reflect on blessings we have.  
+May Allah forgive all your past mistakes.  
+May your life be filled with Noor and peace.  
+May your journey ahead be full of success.  
+Eid Mubarak to you and your family 🤍`,
+
+`This Eid feels special 🌙  
+Because of the people who bring joy in life.  
+May Allah always keep you safe and protected.  
+May your future be bright and peaceful.  
+May you always find reasons to smile.  
+Keep shining always ✨`,
+
+`Another Eid, another blessing 🌙  
+A chance to spread love and kindness.  
+May your hardships turn into ease.  
+May Allah fill your life with barakah.  
+May your heart stay light and hopeful.  
+Ameen 🤍`,
+
+/* 6–10 Ramadan */
+`Ramadan is leaving us 🌙  
+But its peace remains in our hearts.  
+The duas we made are never wasted.  
+May Allah accept all our efforts.  
+May we continue doing الخير always.  
+Ameen 🤍`,
+
+`Those peaceful Ramadan nights 🌌  
+Filled with prayer and reflection.  
+May Allah accept every moment.  
+May our hearts stay connected to Him.  
+May we never lose this feeling.  
+Stay close to Allah 🤍`,
+
+`Ramadan taught us patience 🌸  
+And showed us what truly matters.  
+May we stay consistent in our prayers.  
+May our hearts stay soft and kind.  
+May Allah guide us always.  
+Ameen 🤲`,
+
+`Let’s not leave Ramadan 🌙  
+Let’s carry its Noor forward.  
+Keep praying and trusting Allah.  
+He listens to every silent dua.  
+Stay strong in your faith.  
+Allah is always with you 🤍`,
+
+`May Allah invite us again 🌙  
+To witness another Ramadan.  
+With stronger faith and better hearts.  
+May we return with sincerity.  
+May we never drift away.  
+Ameen 🤍`,
+
+/* 11 Final */
+`Eid Mubarak once again 🌙  
+May your life be filled with peace, happiness and barakah.  
+May every coming day bring you closer to success.  
+May Allah always guide and protect you.  
+Stay smiling and blessed always 🤍`
+
 ];
 
-let current = 0;
+let index = 0;
 
-function showPage(index) {
-  document.body.innerHTML = `
-    <audio src="${pages[index].audio}" autoplay loop></audio>
-    <div class="page active">
-      <h2>${pages[index].text}</h2>
-      <img src="${pages[index].img}" />
-      <br>
-      ${index < pages.length-1 ? '<button onclick="nextPage()">Next ➜</button>' : ''}
+function start(){
+  document.getElementById("intro").style.display = "none";
+  showPage();
+}
+
+function showPage(){
+  const app = document.getElementById("app");
+
+  const page = document.createElement("div");
+  page.className = "page active";
+
+  page.innerHTML = `
+    <div class="card">
+      <p>${pages[index]}</p>
+      <img src="cat${index+1}.jpg">
+      ${index < pages.length-1 ? '<button onclick="next()">Next</button>' : ''}
     </div>
   `;
+
+  app.appendChild(page);
+
+  const audio = document.getElementById("audio");
+
+  if(index < 5){
+    audio.src = "nasheed1.mp3";
+  } else {
+    audio.src = "nasheed2.mp3";
+  }
+
+  audio.play();
 }
 
-function nextPage() {
-  current++;
-  // start controlled by intro screen
-}
+function next(){
+  const pagesDOM = document.querySelectorAll(".page");
+  pagesDOM[pagesDOM.length - 1].classList.remove("active");
 
-showPage(current);
+  index++;
+  showPage();
+}
 </script>
 
 </body>

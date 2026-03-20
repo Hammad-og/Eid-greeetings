@@ -20,6 +20,43 @@ body{
   overflow:auto;
 }
 
+/* Start screen */
+#startScreen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#070b14;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+/* Dark glossy button */
+.start-btn{
+  padding:16px 35px;
+  border:none;
+  border-radius:40px;
+  font-size:18px;
+  font-weight:bold;
+  color:#ffffff;
+  background:rgba(255,255,255,0.08);
+  cursor:pointer;
+  transition:0.25s;
+
+  box-shadow: 
+    inset 0 1px 3px rgba(255,255,255,0.15),
+    inset 0 -2px 4px rgba(0,0,0,0.6);
+}
+
+.start-btn:hover{
+  transform:scale(1.05);
+  background:rgba(255,255,255,0.12);
+}
+
+/* Card */
 .card{
   width:100%;
   max-width:720px;
@@ -27,6 +64,7 @@ body{
   padding:35px;
   border-radius:25px;
   box-shadow:0 0 60px rgba(0,0,0,0.8);
+  display:none;
 }
 
 button{
@@ -60,7 +98,13 @@ img{
 
 <body>
 
-<div class="card">
+<!-- START SCREEN -->
+<div id="startScreen">
+  <button class="start-btn" onclick="startSite()">Tap to Open</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="card" id="mainCard">
   <p id="text"></p>
   <img id="img"><br>
   <button onclick="prev()">Back</button>
@@ -111,6 +155,12 @@ May your life be filled with peace, happiness, and endless barakah. May every co
 let i = 0;
 let currentTrack = "";
 
+function startSite(){
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("mainCard").style.display = "block";
+  show();
+}
+
 function show(){
   document.getElementById("text").innerHTML = pages[i].replace(/\n/g,"<br>");
   document.getElementById("img").src = "cat"+(i+1)+".jpg";
@@ -139,10 +189,6 @@ function prev(){
     show();
   }
 }
-
-document.body.addEventListener("click", () => {
-  show();
-}, { once: true });
 
 </script>
 
